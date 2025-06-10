@@ -27,8 +27,8 @@ export default function CameraSettings() {
       makeDefault
       minAzimuthAngle={-0.436}
       maxAzimuthAngle={0.436}
-      minPolarAngle={Math.PI / 2}
-      maxPolarAngle={Math.PI / 2}
+      minPolarAngle={Math.PI / 2 - 0.5}
+      maxPolarAngle={Math.PI / 2 + 0.125}
       minDistance={10}
       maxDistance={65}
       dampingFactor={0.05}

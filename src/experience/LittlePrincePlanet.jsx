@@ -6,7 +6,7 @@ export default function LittlePrincePlanet(props) {
     "assets/3d-models/little-prince-model.glb"
   );
   return (
-    <group {...props} dispose={null} rotation={[0, Math.PI, 0]}>
+    <group {...props} dispose={null} rotation={[0, Math.PI, 0]} draggable={false}>
       <mesh
         castShadow
         receiveShadow
