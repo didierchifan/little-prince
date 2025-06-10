@@ -9,6 +9,7 @@ function App() {
 
   return (
     <>
+      <Title>Little Prince</Title>
       <Container>
         <Canvas>
           <CameraSettings />
@@ -33,4 +34,12 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Title = styled.h1`
+  z-index: 5;
+  color: tomato;
+  font-weight: 700;
+  position: fixed;
+  top: 15px;
 `;
