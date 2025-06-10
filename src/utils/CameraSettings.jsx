@@ -6,9 +6,8 @@ export default function CameraSettings() {
   const controlsRef = useRef();
 
   useEffect(() => {
-    const angle = Math.PI / 4;
-    const startDistance = 10;
-    const endDistance = 2;
+    const startDistance = 300;
+    const endDistance = 65;
 
     const state = { distance: startDistance };
 
@@ -17,12 +16,7 @@ export default function CameraSettings() {
       duration: 2,
       ease: "power2.out",
       onUpdate: () => {
-        const d = state.distance;
-        const x = d * Math.sin(angle);
-        const y = d * Math.sin(angle);
-        const z = d * Math.cos(angle);
-
-        controlsRef.current?.setLookAt(x, y, z, 0, 0, 0, false);
+        controlsRef.current?.setLookAt(0, 0, state.distance, 0, 0, 0, false);
       },
     });
   }, []);
@@ -31,12 +25,12 @@ export default function CameraSettings() {
     <CameraControls
       ref={controlsRef}
       makeDefault
-      // minPolarAngle={0}
-      // maxPolarAngle={Math.PI / 2.5}
-      minAzimuthAngle={-Infinity}
-      maxAzimuthAngle={Infinity}
-      minDistance={0.5}
-      maxDistance={8}
+      minAzimuthAngle={-0.436}
+      maxAzimuthAngle={0.436}
+      minPolarAngle={Math.PI / 2}
+      maxPolarAngle={Math.PI / 2}
+      minDistance={10}
+      maxDistance={65}
       dampingFactor={0.05}
     />
   );
