@@ -1,12 +1,31 @@
 import React from "react";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, Float } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useRef } from "react";
 
 export default function LittlePrincePlanet(props) {
   const { nodes, materials } = useGLTF(
     "assets/3d-models/little-prince-model.glb"
   );
+
+  const greenPlanetRef = useRef();
+  const hatPlanetRef = useRef();
+  const pinkPlanet = useRef();
+  const yellowPlanet = useRef();
+
+  useFrame((state, delta) => {
+    greenPlanetRef.current.rotation.y += delta * 0.3;
+    hatPlanetRef.current.rotation.y -= delta * 0.2;
+    pinkPlanet.current.rotation.y += delta * 0.25;
+    yellowPlanet.current.rotation.y -= delta * 0.15;
+  });
   return (
-    <group {...props} dispose={null} rotation={[0, Math.PI, 0]} draggable={false}>
+    <group
+      {...props}
+      dispose={null}
+      rotation={[0, Math.PI, 0]}
+      draggable={false}
+    >
       <mesh
         castShadow
         receiveShadow
@@ -97,68 +116,116 @@ export default function LittlePrincePlanet(props) {
           material={materials["setare.001"]}
         />
       </group>
-      <group position={[-20.086, -8.292, -1.385]}>
+
+      {/* green planet */}
+      <Float
+        speed={1} // Animation speed, defaults to 1
+        rotationIntensity={1} // XYZ rotation intensity, defaults to 1
+        floatIntensity={0.6} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+        floatingRange={[1, 10]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
+      >
+        <group ref={greenPlanetRef} position={[-20.086, -8.292, -1.385]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.planet02_1.geometry}
+            material={materials.planet_2}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.planet02_2.geometry}
+            material={materials.CROWN}
+          />
+        </group>
+      </Float>
+
+      {/* hat planet */}
+      <Float
+        speed={1} // Animation speed, defaults to 1
+        rotationIntensity={1} // XYZ rotation intensity, defaults to 1
+        floatIntensity={0.35} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+        floatingRange={[1, 10]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
+      >
+        <group ref={hatPlanetRef} position={[21.094, 4.958, -9.251]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.planet03_1.geometry}
+            material={materials.HAT_STRIP}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.planet03_2.geometry}
+            material={materials["planet_2.002"]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.planet03_3.geometry}
+            material={materials["kolah.001"]}
+          />
+        </group>
+      </Float>
+
+      {/* pink planet */}
+
+      <Float
+        speed={1} // Animation speed, defaults to 1
+        rotationIntensity={1} // XYZ rotation intensity, defaults to 1
+        floatIntensity={0.35} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+        floatingRange={[1, 10]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
+      >
         <mesh
+          ref={pinkPlanet}
           castShadow
           receiveShadow
-          geometry={nodes.planet02_1.geometry}
-          material={materials.planet_2}
+          geometry={nodes.planet04.geometry}
+          material={materials.planet_3}
+          position={[-0.715, 14.43, 3.681]}
         />
+      </Float>
+
+      {/* yellow planet */}
+      <Float
+        speed={1} // Animation speed, defaults to 1
+        rotationIntensity={1} // XYZ rotation intensity, defaults to 1
+        floatIntensity={0.55} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+        floatingRange={[1, 10]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
+      >
         <mesh
+          ref={yellowPlanet}
           castShadow
           receiveShadow
-          geometry={nodes.planet02_2.geometry}
-          material={materials.CROWN}
+          geometry={nodes.planet05.geometry}
+          material={materials.planet_5}
+          position={[-17.99, 25.379, -8.896]}
         />
-      </group>
-      <group position={[21.094, 4.958, -9.251]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.planet03_1.geometry}
-          material={materials.HAT_STRIP}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.planet03_2.geometry}
-          material={materials["planet_2.002"]}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.planet03_3.geometry}
-          material={materials["kolah.001"]}
-        />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.planet04.geometry}
-        material={materials.planet_3}
-        position={[-0.715, 14.43, 3.681]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.planet05.geometry}
-        material={materials.planet_5}
-        position={[-17.99, 25.379, -8.896]}
-      />
-      <group position={[4.72, 39.284, -0.826]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.planet06_1.geometry}
-          material={materials.planet_6}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.planet06_2.geometry}
-          material={materials.fanoos}
-        />
-      </group>
+      </Float>
+
+      {/* tower planet */}
+      <Float
+        speed={1} // Animation speed, defaults to 1
+        rotationIntensity={1} // XYZ rotation intensity, defaults to 1
+        floatIntensity={0.55} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+        floatingRange={[1, 5]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
+      >
+        <group position={[4.72, 39.284, -0.826]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.planet06_1.geometry}
+            material={materials.planet_6}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.planet06_2.geometry}
+            material={materials.fanoos}
+          />
+        </group>
+      </Float>
       <mesh
         castShadow
         receiveShadow
