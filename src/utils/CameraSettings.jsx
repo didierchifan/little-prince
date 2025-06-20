@@ -32,6 +32,8 @@ export default function CameraSettings() {
       minDistance={10}
       maxDistance={65}
       dampingFactor={0.05}
+      enabled={true}
+      truckSpeed={0}
     />
   );
 }

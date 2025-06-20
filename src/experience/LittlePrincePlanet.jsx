@@ -1,7 +1,7 @@
 import React from "react";
 import { useGLTF, Float, Outlines } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 export default function LittlePrincePlanet(props) {
   const { nodes, materials } = useGLTF(
@@ -25,11 +25,11 @@ export default function LittlePrincePlanet(props) {
     planeRef.current.rotation.z += delta * 2;
   });
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const handleDrawerOpen = () => {
-    setIsDrawerOpen(true);
-    console.log("drawer opened");
-  };
+  // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  // const handleDrawerOpen = () => {
+  //   setIsDrawerOpen(true);
+  //   console.log("drawer opened");
+  // };
 
   return (
     <group
@@ -50,7 +50,7 @@ export default function LittlePrincePlanet(props) {
           geometry={nodes.planet01.geometry}
           material={materials.planet_asli}
           position={[7.534, -30.42, -0.791]}
-          onClick={handleDrawerOpen}
+          // onClick={handleDrawerOpen}
         >
           {/* <Outlines
             thickness={10}
