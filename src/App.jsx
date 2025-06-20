@@ -5,6 +5,7 @@ import useLeva from "./utils/useLeva";
 import CameraSettings from "./utils/CameraSettings";
 import LightSettings from "./utils/LightSettings";
 import Experience from "./experience/Experience";
+import Tooltip from "./Tooltip";
 
 function App() {
   const { backgroundColor } = useLeva();
@@ -20,6 +21,7 @@ function App() {
           <Experience />
         </Canvas>
       </Container>
+      <Tooltip />
     </>
   );
 }
