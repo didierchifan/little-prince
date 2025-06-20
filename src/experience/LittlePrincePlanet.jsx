@@ -1,8 +1,7 @@
 import React from "react";
-import { useGLTF, Float } from "@react-three/drei";
+import { useGLTF, Float, Outlines } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import * as THREE from "three";
 
 export default function LittlePrincePlanet(props) {
   const { nodes, materials } = useGLTF(
@@ -16,10 +15,13 @@ export default function LittlePrincePlanet(props) {
   const planeRef = useRef();
 
   useFrame((state, delta) => {
+    // Planet rotations
     greenPlanetRef.current.rotation.y += delta * 0.3;
     hatPlanetRef.current.rotation.y -= delta * 0.2;
     pinkPlanet.current.rotation.y += delta * 0.25;
     yellowPlanet.current.rotation.y -= delta * 0.15;
+
+    // Plane propeller rotation
     planeRef.current.rotation.z += delta * 2;
   });
 
@@ -42,7 +44,15 @@ export default function LittlePrincePlanet(props) {
           geometry={nodes.planet01.geometry}
           material={materials.planet_asli}
           position={[7.534, -30.42, -0.791]}
-        />
+        >
+          <Outlines
+            thickness={10}
+            color="white"
+            angle={Math.PI}
+            polygonOffset
+            polygonOffsetFactor={100}
+          />
+        </mesh>
 
         <group position={[8.685, -9.489, -1.752]}>
           <mesh
