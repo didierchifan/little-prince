@@ -6,7 +6,7 @@ export default function CameraSettings() {
   const controlsRef = useRef();
 
   useEffect(() => {
-    const startDistance = 300;
+    const startDistance = 100;
     const endDistance = 65;
 
     const state = { distance: startDistance };

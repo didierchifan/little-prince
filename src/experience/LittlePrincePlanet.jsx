@@ -2,6 +2,7 @@ import React from "react";
 import { useGLTF, Float } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
+import * as THREE from "three";
 
 export default function LittlePrincePlanet(props) {
   const { nodes, materials } = useGLTF(
@@ -12,13 +13,16 @@ export default function LittlePrincePlanet(props) {
   const hatPlanetRef = useRef();
   const pinkPlanet = useRef();
   const yellowPlanet = useRef();
+  const planeRef = useRef();
 
   useFrame((state, delta) => {
     greenPlanetRef.current.rotation.y += delta * 0.3;
     hatPlanetRef.current.rotation.y -= delta * 0.2;
     pinkPlanet.current.rotation.y += delta * 0.25;
     yellowPlanet.current.rotation.y -= delta * 0.15;
+    planeRef.current.rotation.z += delta * 2;
   });
+
   return (
     <group
       {...props}
@@ -26,96 +30,118 @@ export default function LittlePrincePlanet(props) {
       rotation={[0, Math.PI, 0]}
       draggable={false}
     >
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.planet01.geometry}
-        material={materials.planet_asli}
-        position={[7.534, -30.42, -0.791]}
-      />
-      <group position={[8.685, -9.489, -1.752]}>
+      <Float
+        speed={1} // Animation speed, defaults to 1
+        rotationIntensity={1} // XYZ rotation intensity, defaults to 1
+        floatIntensity={0.5} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+        floatingRange={[1, 1.5]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
+      >
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.littlePrince_1.geometry}
-          material={materials.badan}
+          geometry={nodes.planet01.geometry}
+          material={materials.planet_asli}
+          position={[7.534, -30.42, -0.791]}
         />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.littlePrince_2.geometry}
-          material={materials.golbarg}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.littlePrince_3.geometry}
-          material={materials.cheshm}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.littlePrince_4.geometry}
-          material={materials.white}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.littlePrince_5.geometry}
-          material={materials.skin}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.littlePrince_6.geometry}
-          material={materials.ASLI}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.littlePrince_7.geometry}
-          material={materials.material_32}
-        />
-      </group>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.elice.geometry}
-        material={materials.malakhe}
-        position={[-18.186, 12.228, -4.448]}
-      />
-      <group position={[-18.064, 12.38, 1.242]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.plane_1.geometry}
-          material={materials.plane_1}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.plane_2.geometry}
-          material={materials.plane_2}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.plane_3.geometry}
-          material={materials.plane_4}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.plane_4.geometry}
-          material={materials.plane_3}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.plane_5.geometry}
-          material={materials["setare.001"]}
-        />
-      </group>
+
+        <group position={[8.685, -9.489, -1.752]}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.littlePrince_1.geometry}
+            material={materials.badan}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.littlePrince_2.geometry}
+            material={materials.golbarg}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.littlePrince_3.geometry}
+            material={materials.cheshm}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.littlePrince_4.geometry}
+            material={materials.white}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.littlePrince_5.geometry}
+            material={materials.skin}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.littlePrince_6.geometry}
+            material={materials.ASLI}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.littlePrince_7.geometry}
+            material={materials.material_32}
+          />
+        </group>
+      </Float>
+
+      {/* plane */}
+
+      <Float
+        speed={1} // Animation speed, defaults to 1
+        rotationIntensity={1} // XYZ rotation intensity, defaults to 1
+        floatIntensity={0.5} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
+        floatingRange={[1, 15]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
+      >
+        <group>
+          <mesh
+            ref={planeRef}
+            castShadow
+            receiveShadow
+            geometry={nodes.elice.geometry}
+            material={materials.malakhe}
+            position={[-18.186, 12.228, -4.448]}
+          />
+
+          <group position={[-18.064, 12.38, 1.242]}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.plane_1.geometry}
+              material={materials.plane_1}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.plane_2.geometry}
+              material={materials.plane_2}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.plane_3.geometry}
+              material={materials.plane_4}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.plane_4.geometry}
+              material={materials.plane_3}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.plane_5.geometry}
+              material={materials["setare.001"]}
+            />
+          </group>
+        </group>
+      </Float>
 
       {/* green planet */}
       <Float

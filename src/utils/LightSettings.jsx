@@ -5,7 +5,7 @@ export default function LightSettings() {
   return (
     <>
       <ambientLight intensity={1} />
-      <directionalLight position={[2, 1, 0]} intensity={5} />
+      <directionalLight position={[10, 5, 0]} intensity={5} />
 
       <Sparkles count={800} speed={2} scale={100} size={35} />
       <Environment

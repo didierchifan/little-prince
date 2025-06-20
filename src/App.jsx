@@ -13,7 +13,7 @@ function App() {
     <>
       <Container>
         <Leva hidden={true} />
-        <Canvas>
+        <Canvas gl={{ antialias: true, premultipliedAlpha: true }}>
           <CameraSettings />
           <LightSettings />
           <color attach="background" args={[backgroundColor]} />
