@@ -63,7 +63,7 @@ export default function Tooltip() {
         </StyledDrawerHeader>
         <StyledDrawerFooter>
           <StyledDrawerClose
-            style={{ backgroundColor: "#c3f3ff", color: "#2c82e2" }}
+            style={{ backgroundColor: "#c3f3ff", color: "#003a7d" }}
           >
             Am înțeles, voi fi prezent
           </StyledDrawerClose>
@@ -94,6 +94,7 @@ const InvitationText = styled.p`
 const StyledDrawerContent = styled(DrawerContent)`
   margin-top: 0px !important;
   padding-top: 0px !important;
+  background-color: rgba(20, 25, 30, 0.3);
 `;
 
 const StyledDrawer = styled(Drawer)`
