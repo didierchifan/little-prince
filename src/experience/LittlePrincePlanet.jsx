@@ -1,18 +1,25 @@
 import React from "react";
-import { useGLTF, Float, Outlines } from "@react-three/drei";
+import { useGLTF, Float, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
+import * as THREE from "three";
 
 export default function LittlePrincePlanet(props) {
   const { nodes, materials } = useGLTF(
     "assets/3d-models/little-prince-model.glb"
   );
 
+  const brownPlanet = useRef();
   const greenPlanetRef = useRef();
   const hatPlanetRef = useRef();
   const pinkPlanet = useRef();
   const yellowPlanet = useRef();
   const planeRef = useRef();
+
+  const texture = useTexture("assets/texture-1.webp");
+  const textureTwo = useTexture("assets/texture-2.webp");
+  const textureThree = useTexture("assets/texture-3.webp");
+  const textureFour = useTexture("assets/texture-4.webp");
 
   useFrame((state, delta) => {
     // Planet rotations
@@ -20,16 +27,11 @@ export default function LittlePrincePlanet(props) {
     hatPlanetRef.current.rotation.y -= delta * 0.2;
     pinkPlanet.current.rotation.y += delta * 0.25;
     yellowPlanet.current.rotation.y -= delta * 0.15;
+    brownPlanet.current.rotation.y += delta * 0.2;
 
     // Plane propeller rotation
     planeRef.current.rotation.z += delta * 2;
   });
-
-  // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // const handleDrawerOpen = () => {
-  //   setIsDrawerOpen(true);
-  //   console.log("drawer opened");
-  // };
 
   return (
     <group
@@ -45,23 +47,15 @@ export default function LittlePrincePlanet(props) {
         floatingRange={[1, 1.5]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
       >
         <mesh
+          ref={brownPlanet}
           castShadow
           receiveShadow
           geometry={nodes.planet01.geometry}
           material={materials.planet_asli}
           position={[7.534, -30.42, -0.791]}
-          // onClick={handleDrawerOpen}
-        >
-          {/* <Outlines
-            thickness={10}
-            color="white"
-            angle={Math.PI}
-            polygonOffset
-            polygonOffsetFactor={100}
-          /> */}
-        </mesh>
+        ></mesh>
 
-        <group position={[8.685, -9.489, -1.752]}>
+        {/* <group position={[8.685, -9.489, -1.752]}>
           <mesh
             castShadow
             receiveShadow
@@ -104,7 +98,7 @@ export default function LittlePrincePlanet(props) {
             geometry={nodes.littlePrince_7.geometry}
             material={materials.material_32}
           />
-        </group>
+        </group> */}
       </Float>
 
       {/* plane */}
@@ -167,19 +161,15 @@ export default function LittlePrincePlanet(props) {
         floatIntensity={0.6} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
         floatingRange={[1, 10]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
       >
-        <group ref={greenPlanetRef} position={[-20.086, -8.292, -1.385]}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.planet02_1.geometry}
-            material={materials.planet_2}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.planet02_2.geometry}
-            material={materials.CROWN}
-          />
+        <group
+          ref={greenPlanetRef}
+          position={[-20.086, -8.292, -1.385]}
+          scale={[12, 12, 12]}
+        >
+          <mesh castShadow receiveShadow>
+            <sphereGeometry args={[1, 64, 64]} />
+            <meshStandardMaterial map={textureThree} />
+          </mesh>
         </group>
       </Float>
 
@@ -190,25 +180,21 @@ export default function LittlePrincePlanet(props) {
         floatIntensity={0.35} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1
         floatingRange={[1, 10]} // Range of y-axis values the object will float within, defaults to [-0.1,0.1]
       >
-        <group ref={hatPlanetRef} position={[21.094, 4.958, -9.251]}>
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.planet03_1.geometry}
-            material={materials.HAT_STRIP}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.planet03_2.geometry}
-            material={materials["planet_2.002"]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.planet03_3.geometry}
-            material={materials["kolah.001"]}
-          />
+        <group
+          ref={hatPlanetRef}
+          position={[21.094, 4.958, -9.251]}
+          scale={[8.5, 8.5, 8.5]}
+        >
+          <mesh castShadow receiveShadow>
+            <sphereGeometry args={[1, 64, 64]} />
+
+            <meshStandardMaterial
+              map={texture}
+              roughness={0.7}
+              metalness={0.0}
+              side={THREE.FrontSide}
+            />
+          </mesh>
         </group>
       </Float>
 
@@ -224,10 +210,12 @@ export default function LittlePrincePlanet(props) {
           ref={pinkPlanet}
           castShadow
           receiveShadow
-          geometry={nodes.planet04.geometry}
-          material={materials.planet_3}
           position={[-0.715, 14.43, 3.681]}
-        />
+          scale={[8, 8, 8]}
+        >
+          <sphereGeometry args={[1, 64, 64]} />
+          <meshStandardMaterial map={textureFour} />
+        </mesh>
       </Float>
 
       {/* yellow planet */}
@@ -241,10 +229,13 @@ export default function LittlePrincePlanet(props) {
           ref={yellowPlanet}
           castShadow
           receiveShadow
-          geometry={nodes.planet05.geometry}
-          material={materials.planet_5}
+          // geometry={nodes.planet05.geometry}
           position={[-17.99, 25.379, -8.896]}
-        />
+          scale={[5.5, 5.5, 5.5]}
+        >
+          <sphereGeometry args={[1, 64, 64]} />
+          <meshStandardMaterial map={textureTwo} />
+        </mesh>
       </Float>
 
       {/* tower planet */}

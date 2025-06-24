@@ -6,12 +6,14 @@ import CameraSettings from "./utils/CameraSettings";
 import LightSettings from "./utils/LightSettings";
 import Experience from "./experience/Experience";
 import Tooltip from "./Tooltip";
+import GlobalStyles from "./GlobalStyles";
 
 function App() {
   const { backgroundColor } = useLeva();
 
   return (
     <>
+      <GlobalStyles />
       <Container>
         <Leva hidden={true} />
         <Canvas gl={{ antialias: true, premultipliedAlpha: true }}>

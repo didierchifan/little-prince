@@ -21,7 +21,7 @@ export default function Tooltip() {
             <Baby
               style={{ width: "100%", height: "100%" }}
               size={48}
-              color="#2c82e2"
+              color="#c5dfff"
               strokeWidth={1.3}
             />
           </IconWrapper>
@@ -81,14 +81,19 @@ const StyledButton = styled(Button).attrs({
   right: 16px;
   z-index: 100;
   color: black;
-  background-color: #c3f3ff;
+  background-color: #6b848a;
   height: 50px;
   width: 50px;
-`;
+  animation: blinkBackground 2s ease-in-out infinite;
 
-const InvitationText = styled.p`
-  color: white;
-  text-align: justify;
+  @keyframes blinkBackground {
+    0% {
+      background-color: #6b848a;
+    }
+    50% {
+      background-color: #4b5d78;
+    }
+  }
 `;
 
 const StyledDrawerContent = styled(DrawerContent)`
