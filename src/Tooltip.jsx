@@ -65,7 +65,8 @@ export default function Tooltip() {
           <StyledDrawerClose
             style={{ backgroundColor: "#c3f3ff", color: "#003a7d" }}
           >
-            Am înțeles, voi fi prezent
+            Vă rugăm confirmați prezența printr-un mesaj până la data de 30
+            iulie.
           </StyledDrawerClose>
         </StyledDrawerFooter>
       </StyledDrawerContent>
@@ -121,7 +122,7 @@ const StyledDrawerFooter = styled(DrawerFooter)`
 `;
 
 const StyledDrawerClose = styled(DrawerClose)`
-  height: 50px;
+  height: auto;
 `;
 
 const IconWrapper = styled.div`
