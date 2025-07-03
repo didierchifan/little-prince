@@ -34,7 +34,7 @@ export default function Tooltip() {
           </DrawerTitle> */}
           <DrawerDescription className="text-white text-justify mt-0 pt-0">
             A fost odată pe o stea un mic călător numit Tudor Andrei, care a
-            sosit pe Pământ cu ochii mari și sufletul plin de vise. Pe 31 august
+            sosit pe Pământ cu ochii mari și sufletul plin de vise. Pe 24 august
             2025, povestea lui continuă cu un nou capitol — Botezul.
             <br />
             <br />
