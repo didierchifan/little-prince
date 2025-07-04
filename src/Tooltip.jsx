@@ -50,7 +50,7 @@ export default function Tooltip() {
             🕓 ora 16:00, va rugam sa veniti cu 10 minute inainte.
             <br />
             <br />
-            🌿 Petrecerea în grădină: Restaurantul Suento Strada Toamnei 101,
+            🌿 Petrecerea în grădină: Restaurantul Suento, Strada Toamnei 101,
             București 030167 🕔 ora 17:00
             <br />
             <br />✨ Ținută: Lejeră, casual — ideală pentru o petrecere de vară
